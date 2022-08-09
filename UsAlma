@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static int usAlma(int base,int exp){
+
+        if(exp==0) return 1;
+
+        else return base* usAlma(base,exp-1);
+
+    }
+
+    public static void main(String[] args){
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Taban : ");
+        int taban = input.nextInt();
+
+        System.out.println("Us : ");
+        int us = input.nextInt();
+
+        System.out.println(taban + " ^ " + us + " = " + usAlma(taban,us));
+
+
+
+    }
+}
