@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static void operasyon(int n){
+        int temp = n;
+
+        if(n<=0);
+        else{
+            System.out.print(n + " ");
+            operasyon(n-5);
+        }
+
+        if(temp == n){
+            System.out.print(temp + " ");
+        }
+        else{
+            System.out.print(n + " ");
+            operasyon(n+5);
+        }
+    }
+
+
+
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("N sayisi: ");
+        int sayi = input.nextInt();
+
+        System.out.println("Son deger: ");
+
+        operasyon(sayi);
+        
+    }
+
+
+}
+
