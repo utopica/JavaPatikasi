@@ -1,0 +1,166 @@
+public class OgrenciBilgiSistemi {
+
+    public static class Teacher{
+        String name;
+        String mpno;
+        String branch;
+
+        public Teacher(String name,String branch,String mpno){
+            this.name = name;
+            this.mpno = mpno;
+            this.branch = branch;}
+
+
+        void printInfoT(){
+            System.out.println("Adi:\t" + this.name);
+            System.out.println("Bransi:\t" + this.branch);
+            System.out.println("Telefonu:\t" + this.mpno);
+        }
+
+    }
+
+    public static class Course{
+        Teacher teacher; //Teacher class'ından teach objesi oluştur ve bunu course classının niteliği yaptık. classlar birbiri arasında böyle iletişim kurabilirler
+                       //hafızada(heap) teach adında nesnemiz var ama new key kullanarak oluşturulmuş bir değeri yok,null.
+        String name;
+        String code;
+        String prefix;
+        int note;
+
+        Course(String name, String code, String prefix,Teacher teacher){
+            this.name = name;
+            this.code = code;
+            this.prefix = prefix;
+            this.teacher = teacher;
+            int note = 0; //varsayılan not değeri
+
+        }
+
+
+        void addTeacher(Teacher teacher){
+            if(teacher.branch == prefix) {
+                this.teacher = teacher;
+            }else{
+                System.out.println("Ogretmen ve ders bolumleri uyusmuyor.");
+            }
+
+
+         //dersin prefix'i dersin ismiyle uyuşuyorsa o hocayı atayabil
+
+
+
+        }
+        void printTeacher(){
+            this.teacher.printInfoT();
+
+        }
+        void printInfo(){
+
+            System.out.println("Ders Adi:\t" + this.name);
+            System.out.println("Ders Kodu:\t" + this.code);
+            System.out.println("Prefix:\t" + this.prefix);
+            //System.out.println("Ogretmen:\t" );
+            //this.teacher.printInfoT();
+        }
+
+
+    }
+
+
+    public static class Student{
+        Course course1; //jargon olarak yukarı yazılırlar
+        Course course2;
+        Course course3;
+
+        String name;
+        String  stuNo;
+        String classes;
+
+        double average;
+        boolean isPass;
+
+        Student(String name,String stuNo,String classes,Course course1,Course course2,Course course3){
+            this.name = name;
+            this.stuNo = stuNo;
+            this.classes = classes;
+            this.course1 = course1;
+            this.course2 = course2;
+            this.course3 = course3;
+            this.average = 0.0;
+            this.isPass = false;
+
+
+        }
+        //öğrenci notlarını girme
+
+        void addBulkExamNote(int note1,int note2,int note3){
+            if(note1>=0&&note2>=0&&note3>=0 && note1<=100&&note2<=100&&note3<=100) {
+                this.course1.note = note1; //sınıfa ait olan ögelerde her zaman this kullan
+                this.course2.note = note2;
+                this.course3.note = note3;
+            }else{
+                System.out.println("0-100 arasinda not girimi yapilmalidir.");
+            }
+
+        }
+        void printNote(){
+            System.out.println(course1.name + " Notu:\t" + this.course1.note);
+            System.out.println(course2.name + " Notu:\t" + this.course2.note);
+            System.out.println(course3.name + " Notu:\t" + this.course3.note);
+
+        }
+
+        void isPass(){
+            this.average = calculateAverage();
+
+            if(this.average>=60){
+                System.out.println("Hababam sinifi uyaniyor!");
+                this.isPass = true;
+            }else{
+                System.out.println("Hababam sinifi sinifta kaldi.");
+                this.isPass= false;
+            }
+
+        }
+
+        double calculateAverage(){
+            this.average = (this.course1.note + this.course2.note + this.course3.note) / 3.0;
+            System.out.println("Ortalama:\t" + this.average);
+
+            return average;
+
+        }
+
+
+
+
+    }
+}
+
+
+public class OgrenciBilgiSistemiTestDrive {
+
+    public static void main(String[] args){
+        OgrenciBilgiSistemi obs = new OgrenciBilgiSistemi();
+        OgrenciBilgiSistemi.Teacher obsT1 = new OgrenciBilgiSistemi.Teacher("Mahmut Hoca","TRH","0123");
+        OgrenciBilgiSistemi.Teacher obsT2 = new OgrenciBilgiSistemi.Teacher("Mehmet Hoca","FZK","0123");
+        OgrenciBilgiSistemi.Teacher obsT3 = new OgrenciBilgiSistemi.Teacher("Hurrem","BIYO","0123");
+
+
+
+        OgrenciBilgiSistemi.Course tarih = new OgrenciBilgiSistemi.Course("Tarih","101","TRH",obsT1);
+        tarih.addTeacher(obsT1);
+        OgrenciBilgiSistemi.Course fizik = new OgrenciBilgiSistemi.Course("Fizik","101","FZK",obsT2);
+        fizik.addTeacher(obsT2);
+        OgrenciBilgiSistemi.Course biyoloji = new OgrenciBilgiSistemi.Course("Biyoloji","101","BIYO",obsT3);
+        biyoloji.addTeacher(obsT3);
+
+        OgrenciBilgiSistemi.Student s1 = new OgrenciBilgiSistemi.Student("Inek Saban","185","4",tarih,fizik,biyoloji);
+        s1.addBulkExamNote(40,60,75);
+        s1.printNote();
+        s1.isPass();
+
+
+
+    }
+}
