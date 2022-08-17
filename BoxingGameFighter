@@ -1,0 +1,46 @@
+public class Fighter {
+    String name;
+    int damage;
+    int health;
+    int weight;
+    int dodge; //kaçınma - bloklamada kullanılacak
+    int firstPlayer;
+
+    Fighter(String name,int damage,int health,int weight,int dodge,int firstPlayer){
+        this.name = name;
+        this.damage = damage;
+        this.health = health;
+        this.weight = weight;
+        this.dodge = dodge;
+        this.firstPlayer = firstPlayer;
+
+
+    }
+
+    int hit(Fighter foe){ //rakip,bloklaacak mı?
+
+        System.out.println(this.name + " --> " + foe.name  + "\tHasar Orani -->  " + this.damage);
+
+        if(foe.isDodge()){
+            System.out.println(foe.name + " gelen hasari blokladi!");
+            return foe.health;
+        }
+
+        if(foe.health - this.damage<0){
+            return 0;
+        }
+
+        return foe.health - this.damage;
+    }
+
+    boolean isDodge(){
+        double random = Math.random()*100;
+        return random<=this.dodge;
+    }
+
+    boolean isFirst(){
+        int randomNumber = (int) (Math.random()*3);
+        return  randomNumber == this.firstPlayer;
+    }
+
+}
