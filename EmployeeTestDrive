@@ -1,0 +1,9 @@
+public class EmployeeTestDrive {
+    public static void main(String[] args){
+        Employee employee1 = new Employee("Elif",2000,45,1985);
+        employee1.printInfo();
+
+    }
+
+
+}
