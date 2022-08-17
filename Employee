@@ -1,0 +1,88 @@
+public class Employee {
+    String name;
+    double salary;
+    int workHours;
+    int hireYear;
+    double tax=0;
+    double bonus = 0;
+    double raiseOfSalary = 0;
+    double totalSalary;
+
+    Employee(String name,int salary,int workHours,int hireYear){
+        this.name = name;
+        this.salary = salary;
+        this.workHours = workHours;
+        this.hireYear = hireYear;
+        this.totalSalary = salary;
+
+    }
+
+    void tax(){
+
+        if(this.salary<1000){
+
+        }else{
+            this.tax = this.salary * 0.03;
+            this.totalSalary -= this.tax;
+
+        }
+
+
+    }
+
+    void bonus(){
+        if(this.workHours>40){
+            this.bonus = (this.workHours - 40) * 30;
+            this.totalSalary += this.bonus;
+
+        }
+
+    }
+
+    void raiseSalary(){
+        int currentYear = 2021;
+        double rateOfRise = 0;
+
+        if((currentYear-this.hireYear)<=10){
+            rateOfRise = 0.05;
+            raiseOfSalary = this.salary * rateOfRise;
+            this.totalSalary += raiseOfSalary;
+
+        } else if (currentYear-this.hireYear>=9 && currentYear-this.hireYear<=20 ) {
+            rateOfRise = 0.1;
+            raiseOfSalary = this.salary * rateOfRise;
+            this.totalSalary += raiseOfSalary;
+
+
+
+
+        } else if (currentYear-this.hireYear>=19) {
+            rateOfRise = 0.15;
+            raiseOfSalary = this.salary * rateOfRise;
+            this.totalSalary += raiseOfSalary;
+
+        } else{
+            rateOfRise = 0;
+            raiseOfSalary = this.salary * rateOfRise;
+            this.totalSalary += raiseOfSalary;
+        }
+
+    }
+    void printInfo(){
+        tax();bonus();raiseSalary();
+
+        System.out.println("Name:\t" + this.name);
+        System.out.println("Salary:\t" + this.salary);
+        System.out.println("Total Working Hours:\t" + this.workHours);
+        System.out.println("Hire Year:\t" + this.hireYear);
+        System.out.println("Tax:\t" + tax);
+        System.out.println("Bonus:\t" + bonus);
+        System.out.println("Raise of Salary:\t" +raiseOfSalary );
+        System.out.println("Total Slary:\t" + this.totalSalary );
+    }
+
+
+
+}
+
+
