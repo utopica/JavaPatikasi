@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static int[] sort(int[] array){
+        int temp;
+
+        for(int i=0;i< array.length;i++){
+            for(int j=0;j< array.length;j++){
+                if(array[i] < array[j]){
+                    temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+        return array;
+    }
+
+    static void toString(int[] array){
+        for(int i=0;i<array.length;i++){
+            System.out.println("dizi["+ i +"] = " + array[i]);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Dizinin boyutu: " );
+        int sayi = input.nextInt();
+
+        int[] dizi = new int[sayi];
+
+        for(int i=0;i<sayi;i++){
+
+            System.out.print("dizi["+i+"] = ");
+            int eleman = input.nextInt();
+
+            dizi[i] = eleman;
+        }
+        
+        System.out.println();
+
+        toString(sort(dizi)) ;
+
+
+
+    }
+}
